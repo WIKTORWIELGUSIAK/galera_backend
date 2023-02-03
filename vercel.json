@@ -1,4 +1,3 @@
 {
-  "src": "/(.*)",
-  "dest": "index.ts"
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
