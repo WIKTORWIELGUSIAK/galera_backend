@@ -6,7 +6,8 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "devStart": "nodemon index.ts"
+    "devStart": "nodemon index.ts",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^4.9.0",
