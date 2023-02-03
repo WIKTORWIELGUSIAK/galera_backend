@@ -31,7 +31,6 @@ app.get("/", async (req: Request, res: Response) => {
   res.setHeader("Content-Type", "application/json");
   const rivers = await prisma.rivers.findMany();
   res.json(rivers);
-  console.log("object");
 });
 app.put("/", async (req: Request, res: Response) => {
   const { id, name, coordinates, properties } = req.body;
