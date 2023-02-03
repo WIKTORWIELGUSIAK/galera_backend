@@ -27,7 +27,7 @@ app.post("/rivers", async (req: Request, res: Response) => {
   res.json(rivers);
 });
 
-app.get("/", async (req: Request, res: Response) => {
+app.get("/api", async (req: Request, res: Response) => {
   res.setHeader("Content-Type", "application/json");
   const rivers = await prisma.rivers.findMany();
   res.json(rivers);
