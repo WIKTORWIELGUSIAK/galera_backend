@@ -8,7 +8,6 @@ app.use(express.json());
 const prisma = new PrismaClient();
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "https://galera-kajaki.vercel.app");
-  res.setHeader("Content-Type", "text/html");
   res.header("Access-Control-Allow-Methods", "PUT");
   res.header(
     "Access-Control-Allow-Headers",
@@ -29,6 +28,7 @@ app.post("/rivers", async (req: Request, res: Response) => {
 });
 
 app.get("/", async (req: Request, res: Response) => {
+  res.setHeader("Content-Type", "application/json");
   const rivers = await prisma.rivers.findMany();
   res.json(rivers);
 });
