@@ -7,7 +7,7 @@
   },
   "scripts": {
     "devStart": "nodemon index.ts",
-    "start": "/index.ts",
+    "start": "node index.ts",
     "postinstall": "prisma generate"
   },
   "dependencies": {
