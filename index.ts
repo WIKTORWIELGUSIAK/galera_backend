@@ -127,4 +127,3 @@ app.get("/getRoads", async (req: Request, res: Response) => {
 app.listen(3001, () => {
   console.log("SERVER RUNNING ON PORT 3001");
 });
-export default prisma;
