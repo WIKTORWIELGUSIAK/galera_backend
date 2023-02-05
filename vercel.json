@@ -18,7 +18,7 @@
       "dest": "index.ts"
     },
     {
-      "src": "/getRoads/search_river",
+      "src": "/search_river",
       "dest": "index.ts"
     }
   ]
