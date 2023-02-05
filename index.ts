@@ -27,12 +27,12 @@ app.post("/rivers", async (req: Request, res: Response) => {
   res.json(rivers);
 });
 
-app.get("/api", async (req: Request, res: Response) => {
+app.get("/getRivers", async (req: Request, res: Response) => {
   res.setHeader("Content-Type", "application/json");
   const rivers = await prisma.rivers.findMany();
   res.json(rivers);
 });
-app.put("/api", async (req: Request, res: Response) => {
+app.put("/putRiver", async (req: Request, res: Response) => {
   const { id, name, coordinates, properties } = req.body;
   const updateRiver = await prisma.rivers.update({
     where: {
