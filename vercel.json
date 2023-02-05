@@ -14,7 +14,11 @@
   ],
   "routes": [
     {
-      "src": "/.*",
+      "src": "/getRoads",
+      "dest": "index.ts"
+    },
+    {
+      "src": "/getRoads/search_river",
       "dest": "index.ts"
     }
   ]
