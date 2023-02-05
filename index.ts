@@ -28,7 +28,6 @@ app.post("/rivers", async (req: Request, res: Response) => {
 });
 
 app.get("/getRivers", async (req: Request, res: Response) => {
-  res.setHeader("Content-Type", "application/json");
   const rivers = await prisma.rivers.findMany();
   res.json(rivers);
 });
