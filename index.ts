@@ -27,7 +27,7 @@ app.post("/rivers", async (req: Request, res: Response) => {
   res.json(rivers);
 });
 
-app.get("/api", async (req: Request, res: Response) => {
+app.get("/", async (req: Request, res: Response) => {
   res.setHeader("Content-Type", "application/json");
   const rivers = await prisma.rivers.findMany();
   res.json(rivers);
@@ -124,6 +124,6 @@ app.get("/getRoads", async (req: Request, res: Response) => {
   res.json(roads);
 });
 
-app.listen(3001, () => {
-  console.log("SERVER RUNNING ON PORT 3001");
-});
+// app.listen(3001, () => {
+//   console.log("SERVER RUNNING ON PORT 3001");
+// });
