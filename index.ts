@@ -124,6 +124,6 @@ app.get("/getRoads", async (req: Request, res: Response) => {
   res.json(roads);
 });
 
-// app.listen(process.env.PORT || 4000, () => {
+// app.listen(env("PORT") || 4000, () => {
 //   console.log("SERVER RUNNING ON PORT 3001");
 // });
