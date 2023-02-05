@@ -27,12 +27,12 @@ app.post("/rivers", async (req: Request, res: Response) => {
   res.json(rivers);
 });
 
-app.get("/", async (req: Request, res: Response) => {
+app.get("/api", async (req: Request, res: Response) => {
   res.setHeader("Content-Type", "application/json");
   const rivers = await prisma.rivers.findMany();
   res.json(rivers);
 });
-app.put("/", async (req: Request, res: Response) => {
+app.put("/api", async (req: Request, res: Response) => {
   const { id, name, coordinates, properties } = req.body;
   const updateRiver = await prisma.rivers.update({
     where: {
@@ -46,7 +46,7 @@ app.put("/", async (req: Request, res: Response) => {
   });
   res.json(updateRiver);
 });
-app.delete("/:id", async (req: Request, res: Response) => {
+app.delete("/api/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
   const deletedRiver = await prisma.rivers.delete({
     where: {
@@ -86,7 +86,7 @@ app.post("/roads", async (req: Request, res: Response) => {
   });
   res.json(newContent);
 });
-app.put("/", async (req: Request, res: Response) => {
+app.put("/api", async (req: Request, res: Response) => {
   const { id, name, coordinates, properties } = req.body;
   const updateRiver = await prisma.rivers.update({
     where: {
