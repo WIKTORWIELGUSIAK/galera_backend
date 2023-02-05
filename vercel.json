@@ -1,3 +1,21 @@
 {
-  "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }]
+  "version": 2,
+  "name": "your-app-name",
+  "builds": [
+    {
+      "src": "app.ts",
+      "use": "@vercel/node",
+      "config": {
+        "env": {
+          "PORT": "3001"
+        }
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "app.ts"
+    }
+  ]
 }
