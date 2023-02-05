@@ -127,3 +127,5 @@ app.get("/getRoads", async (req: Request, res: Response) => {
 // app.listen(env("PORT") || 4000, () => {
 //   console.log("SERVER RUNNING ON PORT 3001");
 // });
+
+module.exports=app;
