@@ -20,6 +20,10 @@
     {
       "src": "/search_river",
       "dest": "index.ts"
+    },
+    {
+      "src": "/roads",
+      "dest": "index.ts"
     }
   ]
 }
