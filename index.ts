@@ -1,7 +1,7 @@
 /** @format */
 
 import express, { Response, Request } from "express";
-import { PrismaClient, Rivers } from "@prisma/client";
+import { PrismaClient, RiversV2, Road } from "@prisma/client";
 const app = express();
 app.use(express.json());
 
@@ -15,25 +15,28 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
 app.post("/rivers", async (req: Request, res: Response) => {
-  const { name, coordinates, properties } = req.body;
-  const rivers = await prisma.rivers.create({
+  const { name, coordinates, properties, slug } = req.body;
+  const rivers = await prisma.riversV2.create({
     data: {
       name: name,
       coordinates: coordinates,
       properties: properties,
+      slug: slug,
     },
   });
   res.json(rivers);
 });
 
 app.get("/getRivers", async (req: Request, res: Response) => {
-  const rivers = await prisma.rivers.findMany();
+  const rivers = await prisma.riversV2.findMany();
   res.json(rivers);
 });
+
 app.put("/putRiver", async (req: Request, res: Response) => {
-  const { id, name, coordinates, properties } = req.body;
-  const updateRiver = await prisma.rivers.update({
+  const { id, name, coordinates, properties, slug } = req.body;
+  const updateRiver = await prisma.riversV2.update({
     where: {
       id: id,
     },
@@ -41,13 +44,15 @@ app.put("/putRiver", async (req: Request, res: Response) => {
       name: name,
       coordinates: coordinates,
       properties: properties,
+      slug: slug,
     },
   });
   res.json(updateRiver);
 });
+
 app.delete("/api/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
-  const deletedRiver = await prisma.rivers.delete({
+  const deletedRiver = await prisma.riversV2.delete({
     where: {
       id: Number(id),
     },
@@ -57,12 +62,12 @@ app.delete("/api/:id", async (req: Request, res: Response) => {
 
 app.get("/search_river", async (req: Request, res: Response) => {
   const query = req.query.name?.toString();
-  const rivers = await prisma.rivers.findMany({
+  const rivers = await prisma.riversV2.findMany({
     where: { name: { contains: query } },
   });
 
   const coordinatesArrays: number[] = [];
-  rivers.map((river: Rivers) => {
+  rivers.map((river: RiversV2) => {
     coordinatesArrays.push(JSON.parse(river.coordinates));
   });
 
@@ -75,7 +80,7 @@ app.get("/search_river", async (req: Request, res: Response) => {
 
 app.post("/roads", async (req: Request, res: Response) => {
   const { name, roadCoordinates, properties, selectedRivers } = req.body;
-  const newContent = await prisma.roads.create({
+  const newContent = await prisma.road.create({
     data: {
       name: name,
       roadCoordinates: roadCoordinates,
@@ -85,25 +90,10 @@ app.post("/roads", async (req: Request, res: Response) => {
   });
   res.json(newContent);
 });
-app.put("/api", async (req: Request, res: Response) => {
-  const { id, name, coordinates, properties } = req.body;
-  const updateRiver = await prisma.rivers.update({
-    where: {
-      id: id,
-    },
-    data: {
-      name: name,
-      coordinates: coordinates,
-      properties: properties,
-    },
-  });
-  res.json(updateRiver);
-});
+
 app.put("/roads", async (req: Request, res: Response) => {
   const { id, name, roadCoordinates, properties, selectedRivers } = req.body;
-  console.log("here");
-  console.log(req.body);
-  const updateRoad = await prisma.roads.update({
+  const updateRoad = await prisma.road.update({
     where: {
       id: id,
     },
@@ -115,16 +105,15 @@ app.put("/roads", async (req: Request, res: Response) => {
     },
   });
   res.json(updateRoad);
-  console.log("here");
 });
 
 app.get("/getRoads", async (req: Request, res: Response) => {
-  const roads = await prisma.roads.findMany();
+  const roads = await prisma.road.findMany();
   res.json(roads);
 });
 
-// app.listen(env("PORT") || 4000, () => {
-//   console.log("SERVER RUNNING ON PORT 3001");
-// });
+app.listen(process.env.PORT || 3001, () => {
+  console.log(`Server running on port ${process.env.PORT || 3001}`);
+});
 
-module.exports=app;
+module.exports = app;
