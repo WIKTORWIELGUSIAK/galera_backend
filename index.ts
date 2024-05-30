@@ -1,19 +1,23 @@
-/** @format */
-
 import express, { Response, Request } from "express";
 import { PrismaClient, RiversV2, Road } from "@prisma/client";
+
 const app = express();
 app.use(express.json());
 
 const prisma = new PrismaClient();
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "https://galera-kajaki.vercel.app");
-  res.header("Access-Control-Allow-Methods", "PUT");
+  res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   next();
+});
+
+// Root route
+app.get("/", (req: Request, res: Response) => {
+  res.send("Welcome to the Galera Backend API");
 });
 
 app.post("/rivers", async (req: Request, res: Response) => {
@@ -112,8 +116,9 @@ app.get("/getRoads", async (req: Request, res: Response) => {
   res.json(roads);
 });
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log(`Server running on port ${process.env.PORT || 3001}`);
+const port = process.env.PORT || 3001;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
 
 module.exports = app;
